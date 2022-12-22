@@ -1,0 +1,92 @@
+﻿@model CrudOp.Models.ContactModel
+
+@{
+    ViewBag.Title = "ContactDetails";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        <br />
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2>Contact Details</h2>
+                    </div>
+                    <div class="col-md-2">
+                    @Html.ActionLink("Add New Contact", "AddContact", "Home","", new { @class = "btn btn-outline-dark" })
+                    </div>
+                </div>
+            </div>
+            <hr />
+        @Html.HiddenFor(model => model.ContactID)
+
+
+            <div class="form-group">
+                <div class="row">
+                @*Contact Details*@
+                    <div class="col-md-4">
+                    <label class="text-black-50">Name : </label> &nbsp;
+                    
+                    @Html.DisplayFor(model => model.FullName, new { @class = "form-control" })
+                        <br />
+                    <label class="text-black-50">Email : </label> &nbsp;
+                    @Html.DisplayFor(model => model.emailAddr, new { @class = "form-control" })
+                        <br />
+                    <label class="text-black-50">Profession : </label> &nbsp;
+                    @Html.DisplayFor(model => model.Profession)
+                        <br />
+                    <label class="text-black-50">Company : </label> &nbsp;
+                    @Html.DisplayFor(model => model.Company, new { @class = "form-control" })
+                        <br />
+                    <label class="text-black-50">Category : </label> &nbsp;
+                    @Html.DisplayFor(model => model.Category, new { @class = "form-control" })
+                        <br />
+                    <label class="text-black-50">Date of Brith : </label> &nbsp;
+                    @Html.DisplayFor(model => model.DOB, new { @class = "form-control text-muted", Type = "Date" })
+                        <br />
+                    <label class="text-black-50">Gander : </label> &nbsp;
+                    @Html.DisplayFor(model => model.Gender, new { @class = "form-control" })
+                        <br />
+                    <label class="text-black-50">Mode of communication : </label> &nbsp;
+                    @Html.DisplayFor(model => model.Mode, new { @class = "form-control" })
+
+                    </div>
+                @*Contact Image*@
+                    <div class="col-md-4">
+                        <img src="~/Upload/@((Model.ContactImage != null && Model.ContactImage != "") ? Model.ContactImage: "blank.jpg")" id="ShowImage" alt="Show Image" class="rounded-5" 
+                         style="width: 150px; height: 150px; border: 5px solid #00ffff !important; ">
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2">
+                    @* Showing Next record on previous button because ContactList is reversed *@
+                    @Html.ActionLink("Previous", "NextContact", "Home", new { id = Model.ContactID }, new { @class = "btn btn-outline-info" })
+                    </div>
+                    <div class="col-md-offset-2 col-md-3">
+                    @Html.ActionLink("Edit", "EditContactDetails", "Home", new { id = Model.ContactID }, new { @class = "btn btn-outline-success" }) &nbsp;
+                    @Html.ActionLink("Delete", "DeleteContact", "Home", new { id = Model.ContactID }, new { onclick = "return confirm('Are you sure you want to delete this contact?');", @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("Show List", "Index", "Home","", new { @class = "btn btn-outline-dark" }) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                    @* Showing previous record on next button because ContactList is reversed *@
+                    @Html.ActionLink("Next", "PreviousContact", "Home", new { id = Model.ContactID }, new { @class = "btn btn-outline-info" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="color:darkred">
+                @ViewBag.Message
+                </div>
+            </div>
+        </div>
+}
+
+<script src="~/Content/jquery.min.js"></script>
+<script src="~/Content/jquery.validate.min.js"></script>
+<script src="~/Content/jquery.validate.unobtrusive.min.js"></script>
+

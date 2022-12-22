@@ -1,0 +1,45 @@
+﻿@model CrudOp.Models.ContactModel
+
+@{
+    ViewBag.Title = "EditContactDetails";
+}
+
+@using (Html.BeginForm("EditContactDetails", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>Edit Contact Details</h2>
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ContactID)
+
+        <partial name="_ContactPartialView" />
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="~/Upload/@((@Model.ContactImage != null && Model.ContactImage != "") ? Model.ContactImage: "blank.jpg")" id="imagePreview" alt="Show Image" class="rounded-2" style="width:84px;height:84px;">
+                    <input type="file" id="Image" name="Image" onchange="return fileValidation()" />
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-offset-2 col-md-3">
+                    <br />
+                    <br />
+                    <br />
+                    <input type="submit" value="Update" class="btn btn-outline-success" />
+                    @Html.ActionLink("Show List", "Index", "Home","", new { @class = "btn btn-outline-dark" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:darkred">
+                @ViewBag.Message
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+

@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CrudOp</title>
+    <link href="~/lib/jquery.datatables.min.css" rel="stylesheet" />
+    <link href="~/lib/jquery-ui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CrudOp.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CrudOp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery.datatables.min.js"></script>
+    <script src="~/lib/jquery-ui.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#DOB').datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1980:2017',
+                maxDate: '-5Y',
+                //minDate: '-40Y',
+                defaultDate: '1980-01-01',
+                onSelect: function (date, datepicker) {
+                    if (date != "") {
+                        var DateChangeValue = document.getElementById('DOB');
+                        $(DateChangeValue).attr('value', date);
+                    }
+                }
+                });
+        })
+    </script>
+    <script>
+        function fileValidation() {
+            const alertMessage = "Invalid file type!! \nOnly files with the following extension are allowed :  jpg jpeg png gif.";
+            var baseUrl = document.location.origin;
+            var DefaultImagePath = baseUrl + '/Upload/blank.jpg';
+
+            var fileInput = document.getElementById('Image');
+
+            var filePath = fileInput.value;
+
+            // Allowing file type
+            var allowedExtensions =
+                /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+            if (!allowedExtensions.exec(filePath)) {
+
+                alert(alertMessage);
+                fileInput.value = null;
+                var DefaultImage = document.getElementById('imagePreview');
+                $(DefaultImage).attr('src', DefaultImagePath);
+                return false;
+            }
+            else {
+                // Image preview
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        //document.getElementById(
+                        //    'imagePreview').innerHTML =
+                        //    '<img src="' + e.target.result
+                        //    + '"/>';
+
+                        var Preview = document.getElementById('imagePreview');
+                        //var src = ($(Preview).attr('src') === e.target.result) ? e.target.result : e.target.result;
+                        $(Preview).attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
