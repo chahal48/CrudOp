@@ -21,6 +21,7 @@ namespace CrudOp.Models
         [StringLength(200, MinimumLength = 3, ErrorMessage = "Description character length should be in between 3 to 200.")]
         [RegularExpression("^[a-zA-Z0-9',/@&#.\\s]*$", ErrorMessage = "Sorry, only letters (a-z), numbers (0-9), and periods ('@&#.) are allowed.")]
         public string? Description { get; set; }
+        public DateTime? LastModified { get; set; }
 
         public string initialProfession
         {

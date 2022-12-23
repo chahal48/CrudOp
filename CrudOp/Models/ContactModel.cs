@@ -94,6 +94,8 @@ namespace CrudOp.Models
         //public HttpPostedFileBase Image { get; set; }s
         public string? ContactImage { get; set; }
 
+        public DateTime? LastModified { get; set; }
+
         public string? initialEmail
         {
             get

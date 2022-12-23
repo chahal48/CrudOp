@@ -32,7 +32,7 @@ namespace CrudOp.Controllers
         {
             ModelState.Clear();
 
-            return View(_contactsRepo.GetAllContacts().OrderByDescending(Contact => Contact.ContactID));
+            return View(_contactsRepo.GetAllContacts().OrderByDescending(c => c.ContactID).OrderByDescending(c => c.LastModified));
         }
 
         public IActionResult AddContact()

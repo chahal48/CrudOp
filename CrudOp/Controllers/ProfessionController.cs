@@ -16,7 +16,7 @@ namespace CrudOp.Controllers
         {
             ModelState.Clear();
 
-            return View(_professionRepo.GetAllProfessions().OrderByDescending(Profession => Profession.ProfessionID));
+            return View(_professionRepo.GetAllProfessions().OrderByDescending(p => p.ProfessionID).OrderByDescending(p=>p.LastModified));
         }
         public IActionResult AddProfession()
         {

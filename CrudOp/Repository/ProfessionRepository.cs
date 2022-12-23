@@ -39,7 +39,8 @@ namespace CrudOp.Repository
                     {
                         ProfessionID = Convert.ToInt32(dr["ProfessionID"]),
                         Profession = Convert.ToString(dr["Profession"]),
-                        Description = Convert.ToString(dr["Description"])
+                        Description = Convert.ToString(dr["Description"]),
+                        LastModified = Convert.ToDateTime(dr["LastModified"])
                     }
                     );
             }

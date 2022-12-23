@@ -46,7 +46,8 @@ namespace CrudOp.Repository
                         ModeWhatsapp = Convert.ToBoolean(dr["ModeWhatsapp"]),
                         ModePhone = Convert.ToBoolean(dr["ModePhone"]),
                         ModeEmail = Convert.ToBoolean(dr["ModeEmail"]),
-                        ContactImage = Convert.ToString(dr["ContactImage"])
+                        ContactImage = Convert.ToString(dr["ContactImage"]),
+                        LastModified = Convert.ToDateTime(dr["LastModified"])
                     }
                     );
             }
