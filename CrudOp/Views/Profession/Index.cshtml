@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CrudOp.Models.ProfessionModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-10">
+        </div> 
+        <div class="col-md-2">
+            @Html.ActionLink("Add New Profession", "AddProfession", "Profession","", new { @class = "btn btn-outline-dark" })
+        </div>
+    </div>
+</div>
+<hr />
+<table id="AllProfession" class="display">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Profession)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Manage</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @Html.HiddenFor(model => item.ProfessionID)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditProfessionDetails","Profession", new { id = item.ProfessionID }, new { @class = "btn btn-outline-success" }) &nbsp;
+                    @Html.ActionLink("Delete", "DeleteProfession","Profession", new { id = item.ProfessionID }, new { onclick = "return confirm('Are sure wants to delete?');", @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script src="~/lib/jquery.min.js"></script>
+    <script src="~/lib/jquery.datatables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#AllProfession').DataTable({
+                order: [], // for disable initial shorting
+                pageLength: 5, // for start page length
+                lengthMenu: [[5, 10, 25, -1], [5, 10, 25, 'All']] // for giving specific row count
+            });
+        });
+    </script>
+}
+

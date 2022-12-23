@@ -6,9 +6,6 @@ namespace CrudOp.Models
 {
     public class ProfessionModel
     {
-        [DisplayName("S.No.")]
-        public int SerialNo { get; set; }
-
         [DisplayName("Profession ID")]
         [Required(ErrorMessage = "Id is mandatory!!")]
         public int ProfessionID { get; set; }
@@ -17,13 +14,13 @@ namespace CrudOp.Models
         [Required(ErrorMessage = "Profession name is mandatory!!")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Profession name character length should be in between 3 to 30.")]
         [RegularExpression("^[A-Za-z -]*$", ErrorMessage = "Sorry, only letters (a-z) are allowed.")]
-        //[Remote("IsProfessionAvailable", "Profession", HttpMethod = "Post", ErrorMessage = "Profession already exist.", AdditionalFields = "initialProfession")]
+        [Remote("IsProfessionAvailable", "Profession", ErrorMessage = "Profession is already in use.", AdditionalFields = "initialProfession")]
         public string Profession { get; set; }
 
         [DisplayName("Description")]
         [StringLength(200, MinimumLength = 3, ErrorMessage = "Description character length should be in between 3 to 200.")]
-        [RegularExpression("^[a-zA-Z0-9'@&#.\\s]*$", ErrorMessage = "Sorry, only letters (a-z), numbers (0-9), and periods ('@&#.) are allowed.")]
-        public string Description { get; set; }
+        [RegularExpression("^[a-zA-Z0-9',/@&#.\\s]*$", ErrorMessage = "Sorry, only letters (a-z), numbers (0-9), and periods ('@&#.) are allowed.")]
+        public string? Description { get; set; }
 
         public string initialProfession
         {

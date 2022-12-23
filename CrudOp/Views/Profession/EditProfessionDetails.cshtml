@@ -1,0 +1,54 @@
+﻿@model CrudOp.Models.ProfessionModel
+
+@{
+    ViewBag.Title = "EditProfessionDetails";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h2>Edit Profession Details</h2>
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProfessionID)
+
+        <div class="form-group">
+            <div class="col-md-5">
+                <label asp-for="Profession" class="control-label"></label>
+                <input type="text" asp-for="Profession" class="form-control" />
+                <span asp-validation-for="Profession" class="text-danger"></span>
+                <input asp-for="initialProfession" type="hidden" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-5">
+                <label asp-for="Description" class="control-label"></label>
+                <input type="text" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <input type="submit" value="Save" class="btn btn-outline-success" /> &nbsp;
+                    @Html.ActionLink("Show List", "Index", "Profession","", new { @class = "btn btn-outline-dark" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="color:darkred">
+                @ViewBag.Message
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
