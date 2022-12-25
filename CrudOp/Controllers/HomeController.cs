@@ -43,6 +43,7 @@ namespace CrudOp.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddContact(ContactModel contactModel)
         {
             ViewBag.itemlist = new SelectList(_professionRepo.GetAllProfessions().OrderBy(e => e.Profession), "ProfessionID", "Profession");
@@ -80,6 +81,7 @@ namespace CrudOp.Controllers
             return View(_contactsRepo.GetAllContacts().Find(Contact => Contact.ContactID == id));
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditContactDetails(int id, ContactModel contactModel)
         {
             ViewBag.itemlist = new SelectList(_professionRepo.GetAllProfessions().OrderBy(e => e.Profession), "ProfessionID", "Profession");
