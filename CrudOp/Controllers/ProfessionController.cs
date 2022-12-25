@@ -24,6 +24,7 @@ namespace CrudOp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddProfession(ProfessionModel professionModel)
         {
             if (ModelState.IsValid)
@@ -41,6 +42,7 @@ namespace CrudOp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditProfessionDetails(int id, ProfessionModel professionModel)
         {
             if (ModelState.IsValid)
