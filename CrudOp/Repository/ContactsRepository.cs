@@ -9,11 +9,9 @@ namespace CrudOp.Repository
 {
     public class ContactsRepository : CommonQuery
     {
-        private readonly string DefaultConnection = string.Empty;
-
         public ContactsRepository(IConfiguration configuration) : base(configuration)
         {
-            DefaultConnection = configuration.GetConnectionString("DefaultConnection");
+           
         }
 
         public List<ContactModel> GetAllContacts()

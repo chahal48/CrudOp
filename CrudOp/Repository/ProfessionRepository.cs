@@ -6,10 +6,9 @@ namespace CrudOp.Repository
 {
     public class ProfessionRepository : CommonQuery
     {
-        private readonly string DefaultConnection = string.Empty;
         public ProfessionRepository(IConfiguration configuration) : base(configuration)
         {
-            DefaultConnection = configuration.GetConnectionString("DefaultConnection");
+
         }
 
         public bool AddProfession(ProfessionModel obj)
