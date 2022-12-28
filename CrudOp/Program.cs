@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSingleton<ICommonQuery, CommonQuery>();
 builder.Services.AddScoped<ContactsRepository>();
 builder.Services.AddScoped<ProfessionRepository>();
 

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace CrudOp.Repository
 {
-    public class CommonQuery
+    public class CommonQuery : ICommonQuery
     {
         private readonly string DefaultConnection = string.Empty;
 
