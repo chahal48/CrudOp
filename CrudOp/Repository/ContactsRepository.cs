@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace CrudOp.Repository
 {
-    public class ContactsRepository : CommonQuery
+    public class ContactsRepository 
     {
-        public ContactsRepository(IConfiguration configuration) : base(configuration)
+        private readonly ICommonQuery commonQuery;
+        public ContactsRepository(IConfiguration configuration, ICommonQuery commonQuery)
         {
-           
+            this.commonQuery = commonQuery;
         }
 
         public List<ContactModel> GetAllContacts()
@@ -22,7 +23,7 @@ namespace CrudOp.Repository
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataTable dt = new DataTable();
 
-            dt = FetchQuery(com);
+            dt = commonQuery.FetchQuery(com);
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -69,7 +70,7 @@ namespace CrudOp.Repository
             com.Parameters.AddWithValue("@ModeWhatsapp", obj.ModeWhatsapp);
             com.Parameters.AddWithValue("@ContactImage", obj.ContactImage);
 
-            return Query(com);
+            return commonQuery.Query(com);
         }
 
         public bool UpdateContact(ContactModel obj)
@@ -90,7 +91,7 @@ namespace CrudOp.Repository
             com.Parameters.AddWithValue("@ModeWhatsapp", obj.ModeWhatsapp);
             com.Parameters.AddWithValue("@ContactImage", obj.ContactImage);
 
-            return Query(com);
+            return commonQuery.Query(com);
         }
 
         public bool DeleteContact(int Id)
@@ -99,7 +100,7 @@ namespace CrudOp.Repository
             com.CommandType = CommandType.StoredProcedure;
             com.Parameters.AddWithValue("@ContactID", Id);
 
-            return Query(com);
+            return commonQuery.Query(com);
         }
     }
 }
